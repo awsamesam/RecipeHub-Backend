@@ -1,0 +1,244 @@
+.recipes-container {
+  display: grid;
+  /* الشاشة الصغيرة (Mobile): كرت واحد بالمنتصف */
+  grid-template-columns: repeat(1, minmax(0, 300px)); 
+  justify-content: center; /* توسيط الكرت داخل الشاشة الصغيرة */
+  gap: 20px;
+  padding: 20px;
+  max-width: 1600px; /* زيادة العرض الأقصى لاستيعاب 5 كروت براحة */
+  margin: 0 auto; /* توسيط الحاوية بالكامل في المنتصف */
+  direction: ltr;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* الشاشات المتوسطة (التابلت): 3 كروت بالمنتصف */
+@media (min-width: 768px) {
+  .recipes-container {
+    grid-template-columns: repeat(3, minmax(0, 320px));
+    justify-content: center;
+  }
+}
+
+/* الشاشات الكبيرة جداً (Desktop): 5 كروت أفقياً بالمنتصف */
+@media (min-width: 1200px) {
+  .recipes-container {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-content: center;
+  }
+}
+
+/* تنسيق الكرت الأساسي */
+.box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* حاوية أيقونة القلب في أعلى الكرت من جهة اليمين */
+.recipe-heart-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+
+/* حاوية الصورة */
+.recipe-image-container {
+  position: relative;
+  width: 100%;
+  height: 160px; /* تقليل الارتفاع قليلًا ليتناسب مع 5 كروت أفقياً */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+/* محتوى النصوص بالأسفل */
+.box-content {
+  padding: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.left h1 {
+  font-size: 1rem;
+  color: #ff6b35; 
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;       /* منع النزول لسطر جديد */
+  overflow: hidden;          /* إخفاء النص الزائد */
+  text-overflow: ellipsis;
+}
+
+.left p {
+ font-size: 0.85rem;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+  
+  /* خصائص قص النص الزائد لعدة أسطر */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* عدد الأسطر المسموح بها (يمكنك تغييرها إلى 2 أو 3) */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* أزرار التعديل والحذف */
+.box-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+}
+
+.action-icon {
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.action-icon:hover {
+  transform: scale(1.2);
+}
+
+.edit-icon {
+  color: #3b82f6;
+}
+
+.delete-icon {
+  color: #ef4444;
+}
+
+
+/* SearchRecipes */
+
+.search-recipes {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.search-recipes-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.search-recipes-input:focus {
+  border-color: #2563eb;
+}
+
+.search-recipes-input::placeholder {
+  color: #9ca3af;
+}
+
+@media (max-width: 600px) {
+  .search-recipes {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+/*============= SearchRecipes =================*/
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 35px 0 20px;
+}
+
+.pagination-page,
+.pagination-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #374151;
+  font-size: 15px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pagination-page:hover,
+.pagination-arrow:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.pagination-page.active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.pagination-arrow {
+  font-size: 20px;
+}
+
+.pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    gap: 5px;
+  }
+
+  .pagination-page,
+  .pagination-arrow {
+    min-width: 32px;
+    height: 34px;
+    padding: 0 7px;
+  }
+}
+/* ========== pagination ==============*/
