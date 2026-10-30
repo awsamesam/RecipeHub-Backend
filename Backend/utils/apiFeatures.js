@@ -32,17 +32,14 @@ class ApiFeatures {
     if (this.queryString.keyword?.trim()) {
       const keyword = this.queryString.keyword.trim();
 
-      const escapedKeyword = keyword.replace(
-  /[.*+?^${}()|[\]\\]/g,
-  "\\$&",
-);
+      const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-const searchQuery = {
-  title: {
-    $regex: escapedKeyword,
-    $options: "i",
-  },
-};
+      const searchQuery = {
+        title: {
+          $regex: escapedKeyword,
+          $options: "i",
+        },
+      };
 
       this.filterQuery = {
         ...this.filterQuery,
@@ -92,11 +89,6 @@ const searchQuery = {
 
     const skip = (page - 1) * limit;
     const numberOfPages = Math.ceil(totalDocuments / limit);
-    console.log("this is Pagination", {
-      totalDocuments,
-      limit,
-      numberOfPages: Math.ceil(totalDocuments / limit),
-    });
     this.paginationResult = {
       currentPage: page,
       limit,
